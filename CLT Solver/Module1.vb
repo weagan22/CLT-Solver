@@ -24,7 +24,7 @@
 
     Sub Main()
 
-        'Create materials list
+        'Create materials list update
         ReDim materialList(1)
         materialList(0) = New Material("test0", 0.12, 141, 10, 0.25, 0.114)
         materialList(1) = New Material("AS4/3502 Carbon/Epoxy (MIL-HDBK-17)", 0.12, 19300000.0, 1350000.0, 0.34, 543000.0, -0.0000005, 0.000015, 0, 0.4)
