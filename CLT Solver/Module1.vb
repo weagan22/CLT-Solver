@@ -23,7 +23,6 @@
 
 
     Sub Main()
-
         'Create materials list
         ReDim materialList(1)
         materialList(0) = New Material("test0", 0.12, 141, 10, 0.25, 0.114)
@@ -44,7 +43,8 @@
         'Create ply stackup
         ReDim plyList(9)
         For i = 0 To 9
-            plyList(i) = New Ply(45, 1, True)
+            Dim randomInt As Integer = CInt(Math.Ceiling(Rnd() * 3))
+            plyList(i) = New Ply(randomInt * 45, 1, True)
         Next
 
 
@@ -115,7 +115,7 @@
             plyList(i).calcHoffman(materialList(plyList(i).materialID))
         Next
 
-        'Call outputResults()
+        Call outputResults()
 
     End Sub
 
