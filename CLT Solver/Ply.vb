@@ -18,6 +18,8 @@
     Property betaYY As Double
     Property betaXY As Double
 
+    Property hoffmanFailureIndex As Double
+
     Public Sub New(InitAngle As Double, InitMaterialID As Integer, Optional angleToRad As Boolean = True)
 
         If angleToRad = True Then
@@ -146,6 +148,17 @@
         stressStrainCalculated(3) = plyStrain(0)
         stressStrainCalculated(4) = plyStrain(1)
         stressStrainCalculated(5) = plyStrain(2)
+    End Sub
+
+    Sub calcHoffman(material As Material)
+        Dim term1 As Double = (1 / material.strength_Xt - 1 / material.strength_Xc) * stressStrainCalculated(0)
+        Dim term2 As Double = (1 / material.strength_Yt - 1 / material.strength_Yc) * stressStrainCalculated(1)
+        Dim term3 As Double = stressStrainCalculated(0) ^ 2 / (material.strength_Xt * material.strength_Xc)
+        Dim term4 As Double = stressStrainCalculated(1) ^ 2 / (material.strength_Yt * material.strength_Yc)
+        Dim term5 As Double = stressStrainCalculated(2) ^ 2 / material.strength_S ^ 2
+        Dim term6 As Double = (stressStrainCalculated(0) * stressStrainCalculated(1)) / (material.strength_Xt * material.strength_Xc)
+
+        hoffmanFailureIndex = term1 + term2 + term3 + term4 + term5 - term6
     End Sub
 
     Function qBarMatrix() As Double(,)

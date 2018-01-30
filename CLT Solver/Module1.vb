@@ -27,24 +27,23 @@
         'Create materials list
         ReDim materialList(1)
         materialList(0) = New Material("test0", 0.12, 141, 10, 0.25, 0.114)
-        materialList(1) = New Material("AS4/3502 Carbon/Epoxy (MIL-HDBK-17)", 0.012, 19300000.0, 1350000.0, 0.34, 543000.0, -0.0000005, 0.000015, 0, 0.4)
+        materialList(1) = New Material("AS4/3502 Carbon/Epoxy (MIL-HDBK-17)", 0.012, 19300000.0, 1350000.0, 0.34, 543000.0, -0.0000005, 0.000015, 0, 0.4, 258000.0, -204000.0, 7760, -34600, 14800)
 
         Dim materialXML As New System.Xml.Serialization.XmlSerializer(GetType(Material()))
-        Dim writeFile As New System.IO.StreamWriter("Materials.xml") '"C:\Users\Will Eagan\Desktop\New Text Document.xml")
+        Dim writeFile As New System.IO.StreamWriter("Materials.xml")
         materialXML.Serialize(writeFile, materialList)
         writeFile.Close()
 
-        Dim readfile As New System.IO.StreamReader("Materials.xml") '"C:\Users\Will Eagan\Desktop\New Text Document.xml")
+        Dim readfile As New System.IO.StreamReader("Materials.xml")
         materialList = CType(materialXML.Deserialize(readfile), Material())
 
         For i = 0 To UBound(materialList)
             materialList(i).calculateQmatrix()
         Next
 
-
         'Create ply stackup
-        ReDim plyList(5)
-        For i = 0 To 5
+        ReDim plyList(9)
+        For i = 0 To 9
             plyList(i) = New Ply(45, 1, True)
         Next
 
@@ -52,7 +51,7 @@
 
 
         'Calculate ABD for each ply
-        For i = 0 To 5
+        For i = 0 To UBound(plyList)
             plyList(i).qBarCalculate(materialList(plyList(i).materialID))
         Next
 
@@ -74,9 +73,12 @@
 
         'Create loading matrix
         ReDim loadingMatrix(5)
-        loadingMatrix(0) = 500
+        loadingMatrix(0) = 400
         loadingMatrix(1) = 325
-        loadingMatrix(2) = 600
+        loadingMatrix(2) = 50
+        loadingMatrix(3) = 10
+        loadingMatrix(4) = 0
+        loadingMatrix(5) = 30
 
 
         ReDim totalLoadingMatrix(5)
@@ -108,46 +110,60 @@
             Call plyList(i).calculatePlyStressStrain(lamStrainCurveCalculated)
         Next
 
-        Call outputResults()
+        'Calculate Hoffman Failure Index
+        For i = 0 To UBound(plyList)
+            plyList(i).calcHoffman(materialList(plyList(i).materialID))
+        Next
+
+        'Call outputResults()
 
     End Sub
 
     Sub outputResults()
-        Dim objWriter As New System.IO.StreamWriter("C:\Users\Will.Eagan\Desktop\test.txt")
+        Dim objWriter As New System.IO.StreamWriter("C:\Users\Will Eagan\Desktop\test.txt")
 
         For i = 0 To UBound(materialList)
             objWriter.Write("Material " & i & " Q Matrix" & vbNewLine)
             objWriter.Write(MatrixOps.printMatrix(materialList(i).qMatrix) & "_________________________________________________________" & vbNewLine & vbNewLine)
         Next
 
-        objWriter.Write("Laminate Loading" & vbNewLine)
+        objWriter.Write("Complete Laminate Properties" & vbNewLine)
+        objWriter.Write("Loading" & vbNewLine)
         objWriter.Write(MatrixOps.printSingleMatrix(loadingMatrix) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
-        objWriter.Write("Laminate Thermal Loading" & vbNewLine)
+        objWriter.Write("Thermal Loading" & vbNewLine)
         objWriter.Write(MatrixOps.printSingleMatrix(thermalResultants) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
-        objWriter.Write("Laminate Moisture Loading" & vbNewLine)
+        objWriter.Write("Moisture Loading" & vbNewLine)
         objWriter.Write(MatrixOps.printSingleMatrix(moistureResultants) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
-        objWriter.Write("Laminate Total Loading" & vbNewLine)
+        objWriter.Write("Total Loading" & vbNewLine)
         objWriter.Write(MatrixOps.printSingleMatrix(totalLoadingMatrix) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
-        objWriter.Write("Laminate ABD" & vbNewLine)
+        objWriter.Write("ABD Matrix" & vbNewLine)
         objWriter.Write(MatrixOps.printMatrix(LamABDMatrix) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
-        objWriter.Write("Laminate ABDInv" & vbNewLine)
+        objWriter.Write("ABDInv Matrix" & vbNewLine)
         objWriter.Write(MatrixOps.printMatrix(LamABDMatrixInverted,, True, 8) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
-        objWriter.Write("Laminate Strain-Curvature" & vbNewLine)
+        objWriter.Write("Strain-Curvature Matrix" & vbNewLine)
         objWriter.Write(MatrixOps.printSingleMatrix(lamStrainCurveCalculated,, True, 6) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
         For i = 0 To UBound(plyList)
-            objWriter.Write("Ply: " & i + 1 & " - QBAR" & vbNewLine)
+            objWriter.Write("Ply: " & i + 1 & vbNewLine)
+            objWriter.Write("Angle = " & plyList(i).degAngle & vbNewLine)
+            objWriter.Write("Q-BAR Matrix:" & vbNewLine)
             objWriter.Write(MatrixOps.printMatrix(plyList(i).qBarMatrix))
-            objWriter.Write("Ply: " & i + 1 & " - ABD" & vbNewLine)
+            objWriter.Write("ABD Matrix:" & vbNewLine)
             objWriter.Write(MatrixOps.printMatrix(plyList(i).ABDMatrix))
-            objWriter.Write("Ply: " & i + 1 & " - StressStrain" & vbNewLine)
-            objWriter.Write(MatrixOps.printSingleMatrix(plyList(i).StressStrainMatrix) & "_________________________________________________________" & vbNewLine & vbNewLine)
+            objWriter.Write("Stress-Strain Matrix:" & vbNewLine)
+            objWriter.Write(MatrixOps.printSingleMatrix(plyList(i).StressStrainMatrix))
+            objWriter.Write("Hoffman Failure Index = " & plyList(i).hoffmanFailureIndex & vbNewLine & "_________________________________________________________" & vbNewLine & vbNewLine)
+        Next
+
+        objWriter.Write("Hoffman Failure Index" & vbNewLine)
+        For i = 0 To UBound(plyList)
+            objWriter.Write("Ply: " & i + 1 & ": " & Math.Round(plyList(i).hoffmanFailureIndex, 2) & vbNewLine)
         Next
 
         objWriter.Close()
