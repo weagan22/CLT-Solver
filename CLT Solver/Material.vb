@@ -31,7 +31,7 @@
     End Sub
 
     Sub calculateQmatrix()
-        calcQMatrix(0, 0) = EL ^ 2 / (EL - vLT * ET) 'EL / (1 - νLT * ((ET * νLT) / EL)) '''From Western calc sheet
+        calcQMatrix(0, 0) = EL / (1 - vLT * ((ET * vLT) / EL))  'EL ^ 2 / (EL - vLT * ET) ''''EL / (1 - νLT * ((ET * νLT) / EL)) '''From Western calc sheet
         calcQMatrix(0, 1) = (vLT * EL * ET) / (EL - vLT ^ 2 * ET)
         calcQMatrix(0, 2) = 0
         calcQMatrix(1, 0) = calcQMatrix(0, 1)

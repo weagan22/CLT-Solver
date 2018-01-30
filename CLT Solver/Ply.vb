@@ -34,7 +34,7 @@
     Sub qBarCalculate(material As Material)
         Dim qMatrix(,) As Double = material.qMatrix
 
-        qBarMatrixCalulated(0, 0) = qMatrix(0, 0) * Math.Cos(radAngle) ^ 4 + 2 * (qMatrix(0, 1) + 2 * qMatrix(2, 2)) * Math.Cos(radAngle) ^ 2 * Math.Sin(radAngle) ^ 2 + qMatrix(2, 2) * Math.Sin(radAngle) ^ 4
+        qBarMatrixCalulated(0, 0) = qMatrix(0, 0) * Math.Cos(radAngle) ^ 4 + 2 * (qMatrix(0, 1) + 2 * qMatrix(2, 2)) * Math.Cos(radAngle) ^ 2 * Math.Sin(radAngle) ^ 2 + qMatrix(1, 1) * Math.Sin(radAngle) ^ 4
         qBarMatrixCalulated(0, 1) = qMatrix(0, 1) * (Math.Cos(radAngle) ^ 4 + Math.Sin(radAngle) ^ 4) + (qMatrix(0, 0) + qMatrix(1, 1) - 4 * qMatrix(2, 2)) * Math.Cos(radAngle) ^ 2 * Math.Sin(radAngle) ^ 2
         qBarMatrixCalulated(0, 2) = (qMatrix(0, 0) - qMatrix(0, 1) - 2 * qMatrix(2, 2)) * Math.Cos(radAngle) ^ 3 * Math.Sin(radAngle) - (qMatrix(1, 1) - qMatrix(0, 1) - 2 * qMatrix(2, 2)) * Math.Cos(radAngle) * Math.Sin(radAngle) ^ 3
         qBarMatrixCalulated(1, 0) = qBarMatrixCalulated(0, 1)
@@ -119,19 +119,26 @@
 
     End Function
 
-    Sub calculatePlyStressStrain(inamStrainCurveCalculated() As Double, z As Double, Optional deltaT As Double = 0, Optional deltaM As Double = 0)
+    Sub calculatePlyStressStrain(inLamStrainCurveCalculated() As Double, Optional deltaT As Double = 0, Optional deltaM As Double = 0)
 
         Dim strainVals(2) As Double
         Dim curvatureVals(2) As Double
 
-        strainVals(0) = inamStrainCurveCalculated(0)
-        strainVals(1) = inamStrainCurveCalculated(1)
-        strainVals(2) = inamStrainCurveCalculated(2)
-        curvatureVals(0) = inamStrainCurveCalculated(3)
-        curvatureVals(1) = inamStrainCurveCalculated(4)
-        curvatureVals(2) = inamStrainCurveCalculated(5)
+        strainVals(0) = inLamStrainCurveCalculated(0)
+        strainVals(1) = inLamStrainCurveCalculated(1)
+        strainVals(2) = inLamStrainCurveCalculated(2)
+        curvatureVals(0) = inLamStrainCurveCalculated(3)
+        curvatureVals(1) = inLamStrainCurveCalculated(4)
+        curvatureVals(2) = inLamStrainCurveCalculated(5)
 
-        Dim plyStrain() As Double = MatrixOps.matrixAddSingle(strainVals, MatrixOps.matrixMultByConstSingle(curvatureVals, z))
+        MatrixOps.printSingleMatrix(inLamStrainCurveCalculated, True, True, 6)
+        MatrixOps.printSingleMatrix(curvatureVals, True, True, 6)
+        MatrixOps.printSingleMatrix(MatrixOps.matrixMultByConstSingle(curvatureVals, (HK0 + HK1) / 2), True, True, 6)
+        MatrixOps.printSingleMatrix(strainVals, True, True, 6)
+        MatrixOps.printSingleMatrix(MatrixOps.matrixAddSingle(strainVals, MatrixOps.matrixMultByConstSingle(curvatureVals, (HK0 + HK1) / 2)), True, True, 6)
+
+
+        Dim plyStrain() As Double = MatrixOps.matrixAddSingle(strainVals, MatrixOps.matrixMultByConstSingle(curvatureVals, (HK0 + HK1) / 2))
 
         Dim plyStrainDelta(2) As Double
         plyStrainDelta(0) = plyStrain(0) - deltaT * alphaXX - deltaM * betaXX

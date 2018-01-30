@@ -27,7 +27,7 @@
         'Create materials list
         ReDim materialList(1)
         materialList(0) = New Material("test0", 0.12, 141, 10, 0.25, 0.114)
-        materialList(1) = New Material("AS4/3502 Carbon/Epoxy (MIL-HDBK-17)", 0.12, 19300000.0, 1350000.0, 0.34, 543000.0, -0.0000005, 0.000015, 0, 0.4)
+        materialList(1) = New Material("AS4/3502 Carbon/Epoxy (MIL-HDBK-17)", 0.012, 19300000.0, 1350000.0, 0.34, 543000.0, -0.0000005, 0.000015, 0, 0.4)
 
         Dim materialXML As New System.Xml.Serialization.XmlSerializer(GetType(Material()))
         Dim writeFile As New System.IO.StreamWriter("Materials.xml") '"C:\Users\Will Eagan\Desktop\New Text Document.xml")
@@ -74,7 +74,9 @@
 
         'Create loading matrix
         ReDim loadingMatrix(5)
-        loadingMatrix(4) = 565
+        loadingMatrix(0) = 500
+        loadingMatrix(1) = 325
+        loadingMatrix(2) = 600
 
 
         ReDim totalLoadingMatrix(5)
@@ -102,11 +104,8 @@
         lamStrainCurveCalculated = MatrixOps.matrixMultSingle(LamABDMatrixInverted, totalLoadingMatrix)
 
         'Calculate loading and stress/strain for each ply
-        Dim z As Double = 0
         For i = 0 To UBound(plyList)
-            z = z + (materialList(plyList(i).materialID).Thickness / 2)
-            Call plyList(i).calculatePlyStressStrain(lamStrainCurveCalculated, z)
-            z = z + materialList(plyList(i).materialID).Thickness / 2
+            Call plyList(i).calculatePlyStressStrain(lamStrainCurveCalculated)
         Next
 
         Call outputResults()
@@ -114,7 +113,7 @@
     End Sub
 
     Sub outputResults()
-        Dim objWriter As New System.IO.StreamWriter("C:\Users\Will Eagan\Desktop\test.txt")
+        Dim objWriter As New System.IO.StreamWriter("C:\Users\Will.Eagan\Desktop\test.txt")
 
         For i = 0 To UBound(materialList)
             objWriter.Write("Material " & i & " Q Matrix" & vbNewLine)
@@ -140,7 +139,7 @@
         objWriter.Write(MatrixOps.printMatrix(LamABDMatrixInverted,, True, 8) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
         objWriter.Write("Laminate Strain-Curvature" & vbNewLine)
-        objWriter.Write(MatrixOps.printSingleMatrix(lamStrainCurveCalculated) & "_________________________________________________________" & vbNewLine & vbNewLine)
+        objWriter.Write(MatrixOps.printSingleMatrix(lamStrainCurveCalculated,, True, 6) & "_________________________________________________________" & vbNewLine & vbNewLine)
 
         For i = 0 To UBound(plyList)
             objWriter.Write("Ply: " & i + 1 & " - QBAR" & vbNewLine)
