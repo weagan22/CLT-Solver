@@ -131,13 +131,6 @@
         curvatureVals(1) = inLamStrainCurveCalculated(4)
         curvatureVals(2) = inLamStrainCurveCalculated(5)
 
-        MatrixOps.printSingleMatrix(inLamStrainCurveCalculated, True, True, 6)
-        MatrixOps.printSingleMatrix(curvatureVals, True, True, 6)
-        MatrixOps.printSingleMatrix(MatrixOps.matrixMultByConstSingle(curvatureVals, (HK0 + HK1) / 2), True, True, 6)
-        MatrixOps.printSingleMatrix(strainVals, True, True, 6)
-        MatrixOps.printSingleMatrix(MatrixOps.matrixAddSingle(strainVals, MatrixOps.matrixMultByConstSingle(curvatureVals, (HK0 + HK1) / 2)), True, True, 6)
-
-
         Dim plyStrain() As Double = MatrixOps.matrixAddSingle(strainVals, MatrixOps.matrixMultByConstSingle(curvatureVals, (HK0 + HK1) / 2))
 
         Dim plyStrainDelta(2) As Double
