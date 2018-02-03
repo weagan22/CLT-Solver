@@ -182,12 +182,12 @@
     End Function
 
     Sub calcHoffman(material As Material)
-        Dim term1 As Double = (1 / material.strength_Xt - 1 / material.strength_Xc) * stressStrainCalculatedXY(0)
-        Dim term2 As Double = (1 / material.strength_Yt - 1 / material.strength_Yc) * stressStrainCalculatedXY(1)
-        Dim term3 As Double = stressStrainCalculatedXY(0) ^ 2 / (material.strength_Xt * material.strength_Xc)
-        Dim term4 As Double = stressStrainCalculatedXY(1) ^ 2 / (material.strength_Yt * material.strength_Yc)
-        Dim term5 As Double = stressStrainCalculatedXY(2) ^ 2 / material.strength_S ^ 2
-        Dim term6 As Double = (stressStrainCalculatedXY(0) * stressStrainCalculatedXY(1)) / (material.strength_Xt * material.strength_Xc)
+        Dim term1 As Double = (1 / material.strength_Xt - 1 / material.strength_Xc) * stressStrainCalculated12(0)
+        Dim term2 As Double = (1 / material.strength_Yt - 1 / material.strength_Yc) * stressStrainCalculated12(1)
+        Dim term3 As Double = stressStrainCalculated12(0) ^ 2 / (material.strength_Xt * material.strength_Xc)
+        Dim term4 As Double = stressStrainCalculated12(1) ^ 2 / (material.strength_Yt * material.strength_Yc)
+        Dim term5 As Double = stressStrainCalculated12(2) ^ 2 / material.strength_S ^ 2
+        Dim term6 As Double = (stressStrainCalculated12(0) * stressStrainCalculated12(1)) / (material.strength_Xt * material.strength_Xc)
 
         hoffmanFailureIndex = term1 + term2 + term3 + term4 + term5 - term6
     End Sub

@@ -168,7 +168,7 @@
 
         objWriter.Write("Hoffman Failure Index" & vbNewLine)
         For i = 0 To UBound(plyList)
-            objWriter.Write("Ply: " & i + 1 & ": " & Math.Round(plyList(i).hoffmanFailureIndex, 2) & vbNewLine)
+            objWriter.Write("Ply " & i + 1 & ": " & Math.Round(plyList(i).hoffmanFailureIndex, 2) & vbNewLine)
         Next
 
         objWriter.Close()
