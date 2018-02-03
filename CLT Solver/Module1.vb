@@ -26,9 +26,10 @@
 
 
         'Create materials list
-        ReDim materialList(1)
+        ReDim materialList(2)
         materialList(0) = New Material("test0", 0.12, 141, 10, 0.25, 0.114)
         materialList(1) = New Material("AS4/3502 Carbon/Epoxy (MIL-HDBK-17)", 0.012, 19300000.0, 1350000.0, 0.34, 543000.0, -0.0000005, 0.000015, 0, 0.4, 258000.0, -204000.0, 7760, -34600, 14800)
+        materialList(2) = New Material("AS4/3501-6 Carbon/Epoxy", 0.005, 20010000, 1301000, 0.3, 1001000)
 
         Dim materialXML As New System.Xml.Serialization.XmlSerializer(GetType(Material()))
         Dim writeFile As New System.IO.StreamWriter("Materials.xml")
@@ -42,13 +43,14 @@
             materialList(i).calculateQmatrix()
         Next
 
-        'Create ply stackup
+
+        '#################### Create ply stackup ########################
         ReDim plyList(9)
         For i = 0 To 9
             Dim randomInt As Integer = CInt(Math.Ceiling(Rnd() * 3))
             plyList(i) = New Ply(randomInt * 45, 1, True)
         Next
-
+        '###############################################################
 
 
 
@@ -73,14 +75,15 @@
 
 
 
-        'Create loading matrix
+        '#################### Create loading matrix ########################
         ReDim loadingMatrix(5)
-        loadingMatrix(0) = 400
-        loadingMatrix(1) = 325
-        loadingMatrix(2) = 50
-        loadingMatrix(3) = 10
+        loadingMatrix(0) = 500
+        loadingMatrix(1) = 0
+        loadingMatrix(2) = 0
+        loadingMatrix(3) = 0
         loadingMatrix(4) = 0
-        loadingMatrix(5) = 30
+        loadingMatrix(5) = 0
+        '###################################################################
 
 
         ReDim totalLoadingMatrix(5)
