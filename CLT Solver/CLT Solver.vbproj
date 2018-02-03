@@ -5,12 +5,12 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AE196E2F-85C2-4274-BDB7-1196EB936C6B}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <StartupObject>CTL_Solver_Namespace.My.MyApplication</StartupObject>
+    <OutputType>Exe</OutputType>
+    <StartupObject>CTL_Solver_Namespace.Module1</StartupObject>
     <RootNamespace>CTL_Solver_Namespace</RootNamespace>
     <AssemblyName>CLT Solver</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>Console</MyType>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <PublishUrl>publish\</PublishUrl>

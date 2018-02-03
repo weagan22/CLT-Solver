@@ -2,7 +2,8 @@
 
     Private qBarMatrixCalulated(2, 2) As Double
     Private ABDMatrixCalculated(5, 5) As Double
-    Private stressStrainCalculated(5) As Double
+    Private stressStrainCalculatedXY(5) As Double
+    Private stressStrainCalculated12(5) As Double
     Private thermalResultants(5) As Double
     Private moistureResultants(5) As Double
 
@@ -142,21 +143,51 @@
 
         Dim plyStress() As Double = MatrixOps.matrixMultSingle(qBarMatrixCalulated, plyStrainDelta)
 
-        stressStrainCalculated(0) = plyStress(0)
-        stressStrainCalculated(1) = plyStress(1)
-        stressStrainCalculated(2) = plyStress(2)
-        stressStrainCalculated(3) = plyStrain(0)
-        stressStrainCalculated(4) = plyStrain(1)
-        stressStrainCalculated(5) = plyStrain(2)
+        stressStrainCalculatedXY(0) = plyStress(0)
+        stressStrainCalculatedXY(1) = plyStress(1)
+        stressStrainCalculatedXY(2) = plyStress(2)
+        stressStrainCalculatedXY(3) = plyStrain(0)
+        stressStrainCalculatedXY(4) = plyStrain(1)
+        stressStrainCalculatedXY(5) = plyStrain(2)
+
+        plyStress = transformXYto12(plyStress)
+
+        'Engineering shear strain must be put into tensoral tensoral shear strain eXY = 1/2 yXY
+        plyStrain(2) = plyStrain(2) / 2
+        plyStrain = transformXYto12(plyStrain)
+        plyStrain(2) = plyStrain(2) * 2
+
+        stressStrainCalculated12(0) = plyStress(0)
+        stressStrainCalculated12(1) = plyStress(1)
+        stressStrainCalculated12(2) = plyStress(2)
+        stressStrainCalculated12(3) = plyStrain(0)
+        stressStrainCalculated12(4) = plyStrain(1)
+        stressStrainCalculated12(5) = plyStrain(2)
+
     End Sub
 
+    Function transformXYto12(inMatrix() As Double) As Double()
+        Dim transformMatrix(2, 2) As Double
+        transformMatrix(0, 0) = Math.Cos(radAngle) ^ 2
+        transformMatrix(0, 1) = Math.Sin(radAngle) ^ 2
+        transformMatrix(0, 2) = 2 * Math.Cos(radAngle) * Math.Sin(radAngle)
+        transformMatrix(1, 0) = transformMatrix(0, 1)
+        transformMatrix(1, 1) = transformMatrix(0, 0)
+        transformMatrix(1, 2) = -transformMatrix(0, 2)
+        transformMatrix(2, 0) = -Math.Sin(radAngle) * Math.Cos(radAngle)
+        transformMatrix(2, 1) = -transformMatrix(2, 0)
+        transformMatrix(2, 2) = transformMatrix(0, 0) - transformMatrix(0, 1)
+
+        Return MatrixOps.matrixMultSingle(transformMatrix, inMatrix)
+    End Function
+
     Sub calcHoffman(material As Material)
-        Dim term1 As Double = (1 / material.strength_Xt - 1 / material.strength_Xc) * stressStrainCalculated(0)
-        Dim term2 As Double = (1 / material.strength_Yt - 1 / material.strength_Yc) * stressStrainCalculated(1)
-        Dim term3 As Double = stressStrainCalculated(0) ^ 2 / (material.strength_Xt * material.strength_Xc)
-        Dim term4 As Double = stressStrainCalculated(1) ^ 2 / (material.strength_Yt * material.strength_Yc)
-        Dim term5 As Double = stressStrainCalculated(2) ^ 2 / material.strength_S ^ 2
-        Dim term6 As Double = (stressStrainCalculated(0) * stressStrainCalculated(1)) / (material.strength_Xt * material.strength_Xc)
+        Dim term1 As Double = (1 / material.strength_Xt - 1 / material.strength_Xc) * stressStrainCalculatedXY(0)
+        Dim term2 As Double = (1 / material.strength_Yt - 1 / material.strength_Yc) * stressStrainCalculatedXY(1)
+        Dim term3 As Double = stressStrainCalculatedXY(0) ^ 2 / (material.strength_Xt * material.strength_Xc)
+        Dim term4 As Double = stressStrainCalculatedXY(1) ^ 2 / (material.strength_Yt * material.strength_Yc)
+        Dim term5 As Double = stressStrainCalculatedXY(2) ^ 2 / material.strength_S ^ 2
+        Dim term6 As Double = (stressStrainCalculatedXY(0) * stressStrainCalculatedXY(1)) / (material.strength_Xt * material.strength_Xc)
 
         hoffmanFailureIndex = term1 + term2 + term3 + term4 + term5 - term6
     End Sub
@@ -170,7 +201,7 @@
     End Function
 
     Function StressStrainMatrix()
-        Return stressStrainCalculated
+        Return stressStrainCalculated12
     End Function
 
 

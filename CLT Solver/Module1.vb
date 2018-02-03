@@ -23,6 +23,8 @@
 
 
     Sub Main()
+
+
         'Create materials list
         ReDim materialList(1)
         materialList(0) = New Material("test0", 0.12, 141, 10, 0.25, 0.114)
@@ -206,5 +208,6 @@
 
         'Exit Sub
     End Sub
+
 
 End Module
