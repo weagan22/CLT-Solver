@@ -19,7 +19,8 @@
     Property betaYY As Double
     Property betaXY As Double
 
-    Property hoffmanFailureIndex As Double
+    Property hoffmanFailIndex As Double
+    Property TWfailIndex As Double
 
     Public Sub New(InitAngle As Double, InitMaterialID As Integer, Optional angleToRad As Boolean = True)
 
@@ -189,7 +190,21 @@
         Dim term5 As Double = stressStrainCalculated12(2) ^ 2 / material.strength_S ^ 2
         Dim term6 As Double = (stressStrainCalculated12(0) * stressStrainCalculated12(1)) / (material.strength_Xt * material.strength_Xc)
 
-        hoffmanFailureIndex = term1 + term2 + term3 + term4 + term5 - term6
+        hoffmanFailIndex = term1 + term2 + term3 + term4 + term5 - term6
+    End Sub
+
+    Sub calcTsaiWu(material As Material)
+        Dim F1 As Double = (1 / material.strength_Xt) + (1 / material.strength_Xc)
+        Dim F2 As Double = (1 / material.strength_Yt) + (1 / material.strength_Yc)
+        Dim F6 As Double = 0
+        Dim F11 As Double = -1 / (material.strength_Xt * material.strength_Xc)
+        Dim F22 As Double = -1 / (material.strength_Yt * material.strength_Yc)
+        Dim F66 As Double = 1 / (material.strength_S ^ 2)
+        Dim F12 As Double = material.TWintTerm
+
+        TWfailIndex = F1 * stressStrainCalculated12(0) + F2 * stressStrainCalculated12(1) + F6 * stressStrainCalculated12(2)
+        TWfailIndex = TWfailIndex + F11 * stressStrainCalculated12(0) ^ 2 + F22 * stressStrainCalculated12(1) ^ 2 + F66 * stressStrainCalculated12(2) ^ 2
+        TWfailIndex = TWfailIndex + 2 * F12 * stressStrainCalculated12(0) * stressStrainCalculated12(1)
     End Sub
 
     Function qBarMatrix() As Double(,)

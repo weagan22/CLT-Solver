@@ -17,6 +17,8 @@
     Public Property strength_Yc As Double
     Public Property strength_S As Double
 
+    Public Property TWintTerm As Double
+
     Private calcQMatrix(2, 2) As Double
 
     Public Sub New()
@@ -36,7 +38,8 @@
                    Optional inStrength_Xc As Double = 0.0000001,
                    Optional inStrength_Yt As Double = 0.0000001,
                    Optional inStrength_Yc As Double = 0.0000001,
-                   Optional inStrength_S As Double = 0.0000001)
+                   Optional inStrength_S As Double = 0.0000001,
+                   Optional inTWfailIndex As Double = 0)
 
         Type = inName
         Thickness = inThickness
@@ -54,6 +57,8 @@
         strength_Yt = inStrength_Yt
         strength_Yc = inStrength_Yc
         strength_S = inStrength_S
+
+        TWintTerm = inTWfailIndex
 
     End Sub
 
