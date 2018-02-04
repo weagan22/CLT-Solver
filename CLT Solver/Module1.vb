@@ -85,11 +85,11 @@
 
         '#################### Create loading matrix ########################
         ReDim loadingMatrix(5)
-        loadingMatrix(0) = 500
+        loadingMatrix(0) = 20
         loadingMatrix(1) = 0
         loadingMatrix(2) = 0
         loadingMatrix(3) = 0
-        loadingMatrix(4) = 50
+        loadingMatrix(4) = 0
         loadingMatrix(5) = 0
         '###################################################################
 
