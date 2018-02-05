@@ -54,10 +54,10 @@
         'Next
 
         ReDim plyList(3)
-        plyList(0) = New Ply(45, 1, True)
-        plyList(1) = New Ply(45, 1, True)
-        plyList(2) = New Ply(45, 1, True)
-        plyList(3) = New Ply(45, 1, True)
+        plyList(0) = New Ply(0, 1, True)
+        plyList(1) = New Ply(90, 1, True)
+        plyList(2) = New Ply(90, 1, True)
+        plyList(3) = New Ply(0, 1, True)
         '###############################################################
 
 
@@ -85,7 +85,7 @@
 
         '#################### Create loading matrix ########################
         ReDim loadingMatrix(5)
-        loadingMatrix(0) = 20
+        loadingMatrix(0) = 200
         loadingMatrix(1) = 0
         loadingMatrix(2) = 0
         loadingMatrix(3) = 0
