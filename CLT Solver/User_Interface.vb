@@ -156,7 +156,11 @@ Public Class User_Interface
         End If
 
         If midPly = True And symCheck() = True Then
-            PlyNotation.AppendText("{mid}")
+            PlyNotation.SelectionCharOffset = -6
+            PlyNotation.SelectionFont = New Drawing.Font("Microsoft Sans Serif", 6)
+            PlyNotation.AppendText("bar")
+            PlyNotation.SelectionFont = New Drawing.Font("Microsoft Sans Serif", 8.5)
+            PlyNotation.SelectionCharOffset = 0
         End If
 
         PlyNotation.AppendText("]")
