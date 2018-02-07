@@ -96,7 +96,7 @@ Public Class User_Interface
                 For z = i To loopVar - 2
                     If CStr(LayerTable.Item(2, z).Value) = CStr(LayerTable.Item(2, z + 1).Value) And plusMinus = False Then
                         groupCnt = groupCnt + 1
-                    ElseIf CStr(LayerTable.Item(2, z + 1).Value) = "-" & CStr(LayerTable.Item(2, z).Value) And plusMinus = False Then
+                    ElseIf CStr(LayerTable.Item(2, z + 1).Value) = "-" & CStr(LayerTable.Item(2, z).Value) And plusMinus = False And groupCnt = 1 Then
                         plusMinus = True
                         z = z + 1
                     ElseIf plusMinus = True Then
