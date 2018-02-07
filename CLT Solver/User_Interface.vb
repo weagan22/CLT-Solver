@@ -173,6 +173,7 @@ Public Class User_Interface
             PlyNotation.SelectionCharOffset = 0
         End If
 
+        PlyNotation.SelectionAlignment = HorizontalAlignment.Center
         PlyNotation.Update()
         PlyNotation.ReadOnly = True
 
