@@ -4,6 +4,8 @@ Public Class User_Interface
     Private Sub User_Interface_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Module1.Main()
         'MsgBox(Environment.CurrentDirectory)
+        Me.Show()
+        Label1.Text = Format(0.000000269, "Scientific")
         'Close()
     End Sub
 

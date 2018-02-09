@@ -22,10 +22,10 @@ Partial Class User_Interface
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenDataFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -42,6 +42,7 @@ Partial Class User_Interface
         Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabSettings = New System.Windows.Forms.TabPage()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.CheckBox13 = New System.Windows.Forms.CheckBox()
         Me.CheckBox12 = New System.Windows.Forms.CheckBox()
@@ -64,16 +65,17 @@ Partial Class User_Interface
         Me.LabelMaterialDB = New System.Windows.Forms.Label()
         Me.LabelOutput = New System.Windows.Forms.Label()
         Me.TabLayup = New System.Windows.Forms.TabPage()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.PlyNotation = New System.Windows.Forms.RichTextBox()
-        Me.BtnSym = New System.Windows.Forms.Button()
-        Me.Btn_Clear = New System.Windows.Forms.Button()
-        Me.LabelSym = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.LayerTable = New System.Windows.Forms.DataGridView()
         Me.Layer = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MatID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PlyAngle = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.PlyNotation = New System.Windows.Forms.RichTextBox()
+        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
+        Me.LabelSym = New System.Windows.Forms.Label()
+        Me.Btn_Clear = New System.Windows.Forms.Button()
+        Me.BtnSym = New System.Windows.Forms.Button()
         Me.TabLoads = New System.Windows.Forms.TabPage()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.LoadNX = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -84,7 +86,8 @@ Partial Class User_Interface
         Me.LoadMXY = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabMaterial = New System.Windows.Forms.TabPage()
         Me.MatTable = New System.Windows.Forms.DataGridView()
-        Me.MatName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MaterialID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MatName = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.MatThickness = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MatEL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MatET = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -103,7 +106,7 @@ Partial Class User_Interface
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Btn_Analyze = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.MenuStrip.SuspendLayout()
         Me.MainStatusStrip.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -112,16 +115,16 @@ Partial Class User_Interface
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.TabLayup.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.LayerTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
+        Me.TableLayoutPanel5.SuspendLayout()
         Me.TabLoads.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabMaterial.SuspendLayout()
         CType(Me.MatTable, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        Me.TableLayoutPanel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'MenuStrip
@@ -129,7 +132,7 @@ Partial Class User_Interface
         Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.LibraryToolStripMenuItem, Me.AnalysisToolStripMenuItem, Me.HelpToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
-        Me.MenuStrip.Size = New System.Drawing.Size(957, 24)
+        Me.MenuStrip.Size = New System.Drawing.Size(805, 24)
         Me.MenuStrip.TabIndex = 0
         Me.MenuStrip.Text = "MenuStrip"
         '
@@ -202,9 +205,9 @@ Partial Class User_Interface
         'MainStatusStrip
         '
         Me.MainStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel})
-        Me.MainStatusStrip.Location = New System.Drawing.Point(0, 611)
+        Me.MainStatusStrip.Location = New System.Drawing.Point(0, 609)
         Me.MainStatusStrip.Name = "MainStatusStrip"
-        Me.MainStatusStrip.Size = New System.Drawing.Size(957, 22)
+        Me.MainStatusStrip.Size = New System.Drawing.Size(805, 22)
         Me.MainStatusStrip.TabIndex = 1
         Me.MainStatusStrip.Text = "Status"
         '
@@ -224,20 +227,32 @@ Partial Class User_Interface
         Me.TabControl1.Location = New System.Drawing.Point(3, 3)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(951, 535)
+        Me.TabControl1.Size = New System.Drawing.Size(799, 533)
         Me.TabControl1.TabIndex = 2
         '
         'TabSettings
         '
+        Me.TabSettings.Controls.Add(Me.Label1)
+        Me.TabSettings.Controls.Add(Me.ComboBox1)
         Me.TabSettings.Controls.Add(Me.GroupBox2)
         Me.TabSettings.Controls.Add(Me.CheckOverwrite)
         Me.TabSettings.Controls.Add(Me.GroupBox1)
         Me.TabSettings.Location = New System.Drawing.Point(4, 22)
         Me.TabSettings.Name = "TabSettings"
-        Me.TabSettings.Size = New System.Drawing.Size(943, 456)
+        Me.TabSettings.Size = New System.Drawing.Size(791, 507)
         Me.TabSettings.TabIndex = 2
         Me.TabSettings.Text = "Settings"
         Me.TabSettings.UseVisualStyleBackColor = True
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Imperial (Freedom Units)", "Metric"})
+        Me.ComboBox1.Location = New System.Drawing.Point(732, 42)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(147, 21)
+        Me.ComboBox1.TabIndex = 5
         '
         'GroupBox2
         '
@@ -471,63 +486,10 @@ Partial Class User_Interface
         Me.TabLayup.Location = New System.Drawing.Point(4, 22)
         Me.TabLayup.Name = "TabLayup"
         Me.TabLayup.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabLayup.Size = New System.Drawing.Size(943, 509)
+        Me.TabLayup.Size = New System.Drawing.Size(791, 507)
         Me.TabLayup.TabIndex = 0
         Me.TabLayup.Text = "Layup"
         Me.TabLayup.UseVisualStyleBackColor = True
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.PlyNotation)
-        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 53)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(931, 44)
-        Me.GroupBox3.TabIndex = 5
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Ply Notation"
-        '
-        'PlyNotation
-        '
-        Me.PlyNotation.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PlyNotation.Location = New System.Drawing.Point(3, 16)
-        Me.PlyNotation.Name = "PlyNotation"
-        Me.PlyNotation.Size = New System.Drawing.Size(925, 25)
-        Me.PlyNotation.TabIndex = 3
-        Me.PlyNotation.Text = ""
-        '
-        'BtnSym
-        '
-        Me.BtnSym.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.BtnSym.Location = New System.Drawing.Point(313, 3)
-        Me.BtnSym.Name = "BtnSym"
-        Me.BtnSym.Size = New System.Drawing.Size(304, 38)
-        Me.BtnSym.TabIndex = 1
-        Me.BtnSym.Text = "Symmetry"
-        Me.BtnSym.UseVisualStyleBackColor = True
-        '
-        'Btn_Clear
-        '
-        Me.Btn_Clear.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Btn_Clear.Location = New System.Drawing.Point(3, 3)
-        Me.Btn_Clear.Name = "Btn_Clear"
-        Me.Btn_Clear.Size = New System.Drawing.Size(304, 38)
-        Me.Btn_Clear.TabIndex = 4
-        Me.Btn_Clear.Text = "Clear"
-        Me.Btn_Clear.UseVisualStyleBackColor = True
-        '
-        'LabelSym
-        '
-        Me.LabelSym.AutoSize = True
-        Me.LabelSym.BackColor = System.Drawing.Color.Lime
-        Me.LabelSym.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.LabelSym.Font = New System.Drawing.Font("Palatino Linotype", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelSym.Location = New System.Drawing.Point(623, 0)
-        Me.LabelSym.Name = "LabelSym"
-        Me.LabelSym.Size = New System.Drawing.Size(305, 44)
-        Me.LabelSym.TabIndex = 2
-        Me.LabelSym.Text = "  SYMMETRY  "
-        Me.LabelSym.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'TableLayoutPanel1
         '
@@ -543,7 +505,7 @@ Partial Class User_Interface
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(937, 503)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(785, 501)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'LayerTable
@@ -556,13 +518,13 @@ Partial Class User_Interface
         Me.LayerTable.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.LayerTable.Location = New System.Drawing.Point(3, 103)
         Me.LayerTable.Name = "LayerTable"
-        Me.LayerTable.Size = New System.Drawing.Size(931, 397)
+        Me.LayerTable.Size = New System.Drawing.Size(779, 395)
         Me.LayerTable.TabIndex = 0
         '
         'Layer
         '
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.Layer.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.Layer.DefaultCellStyle = DataGridViewCellStyle1
         Me.Layer.HeaderText = "Layer"
         Me.Layer.Name = "Layer"
         Me.Layer.ReadOnly = True
@@ -571,10 +533,10 @@ Partial Class User_Interface
         '
         'MatID
         '
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.Format = "N0"
-        DataGridViewCellStyle10.NullValue = "0"
-        Me.MatID.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Format = "N0"
+        DataGridViewCellStyle2.NullValue = "0"
+        Me.MatID.DefaultCellStyle = DataGridViewCellStyle2
         Me.MatID.HeaderText = "Material"
         Me.MatID.Name = "MatID"
         Me.MatID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
@@ -582,14 +544,84 @@ Partial Class User_Interface
         '
         'PlyAngle
         '
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle11.Format = "N0"
-        DataGridViewCellStyle11.NullValue = "0"
-        Me.PlyAngle.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.Format = "N0"
+        DataGridViewCellStyle3.NullValue = "0"
+        Me.PlyAngle.DefaultCellStyle = DataGridViewCellStyle3
         Me.PlyAngle.HeaderText = "Ply Angle"
         Me.PlyAngle.Name = "PlyAngle"
         Me.PlyAngle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         Me.PlyAngle.Width = 57
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.PlyNotation)
+        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 53)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(779, 44)
+        Me.GroupBox3.TabIndex = 5
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Ply Notation"
+        '
+        'PlyNotation
+        '
+        Me.PlyNotation.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PlyNotation.Location = New System.Drawing.Point(3, 16)
+        Me.PlyNotation.Name = "PlyNotation"
+        Me.PlyNotation.Size = New System.Drawing.Size(773, 25)
+        Me.PlyNotation.TabIndex = 3
+        Me.PlyNotation.Text = ""
+        '
+        'TableLayoutPanel5
+        '
+        Me.TableLayoutPanel5.ColumnCount = 3
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
+        Me.TableLayoutPanel5.Controls.Add(Me.LabelSym, 2, 0)
+        Me.TableLayoutPanel5.Controls.Add(Me.Btn_Clear, 0, 0)
+        Me.TableLayoutPanel5.Controls.Add(Me.BtnSym, 1, 0)
+        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
+        Me.TableLayoutPanel5.RowCount = 1
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(779, 44)
+        Me.TableLayoutPanel5.TabIndex = 6
+        '
+        'LabelSym
+        '
+        Me.LabelSym.AutoSize = True
+        Me.LabelSym.BackColor = System.Drawing.Color.Lime
+        Me.LabelSym.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.LabelSym.Font = New System.Drawing.Font("Palatino Linotype", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelSym.Location = New System.Drawing.Point(521, 0)
+        Me.LabelSym.Name = "LabelSym"
+        Me.LabelSym.Size = New System.Drawing.Size(255, 44)
+        Me.LabelSym.TabIndex = 2
+        Me.LabelSym.Text = "  SYMMETRY  "
+        Me.LabelSym.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Btn_Clear
+        '
+        Me.Btn_Clear.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Btn_Clear.Location = New System.Drawing.Point(3, 3)
+        Me.Btn_Clear.Name = "Btn_Clear"
+        Me.Btn_Clear.Size = New System.Drawing.Size(253, 38)
+        Me.Btn_Clear.TabIndex = 4
+        Me.Btn_Clear.Text = "Clear"
+        Me.Btn_Clear.UseVisualStyleBackColor = True
+        '
+        'BtnSym
+        '
+        Me.BtnSym.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.BtnSym.Location = New System.Drawing.Point(262, 3)
+        Me.BtnSym.Name = "BtnSym"
+        Me.BtnSym.Size = New System.Drawing.Size(253, 38)
+        Me.BtnSym.TabIndex = 1
+        Me.BtnSym.Text = "Symmetry"
+        Me.BtnSym.UseVisualStyleBackColor = True
         '
         'TabLoads
         '
@@ -597,7 +629,7 @@ Partial Class User_Interface
         Me.TabLoads.Location = New System.Drawing.Point(4, 22)
         Me.TabLoads.Name = "TabLoads"
         Me.TabLoads.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabLoads.Size = New System.Drawing.Size(943, 456)
+        Me.TabLoads.Size = New System.Drawing.Size(791, 507)
         Me.TabLoads.TabIndex = 1
         Me.TabLoads.Text = "Loads"
         Me.TabLoads.UseVisualStyleBackColor = True
@@ -606,7 +638,7 @@ Partial Class User_Interface
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LoadNX, Me.LoadNY, Me.LoadXY, Me.LoadMX, Me.LoadMY, Me.LoadMXY})
-        Me.DataGridView1.Location = New System.Drawing.Point(74, 70)
+        Me.DataGridView1.Location = New System.Drawing.Point(19, 82)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(711, 150)
         Me.DataGridView1.TabIndex = 0
@@ -646,26 +678,34 @@ Partial Class User_Interface
         Me.TabMaterial.Controls.Add(Me.MatTable)
         Me.TabMaterial.Location = New System.Drawing.Point(4, 22)
         Me.TabMaterial.Name = "TabMaterial"
-        Me.TabMaterial.Size = New System.Drawing.Size(943, 456)
+        Me.TabMaterial.Size = New System.Drawing.Size(791, 507)
         Me.TabMaterial.TabIndex = 3
         Me.TabMaterial.Text = "Material"
         Me.TabMaterial.UseVisualStyleBackColor = True
         '
         'MatTable
         '
-        DataGridViewCellStyle12.NullValue = Nothing
-        Me.MatTable.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.NullValue = Nothing
+        Me.MatTable.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle4
         Me.MatTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.MatTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MatName, Me.MatThickness, Me.MatEL, Me.MatET, Me.MatGLT, Me.MatvLT, Me.MatThermalA1, Me.MatThermalA2, Me.MatMoistB1, Me.MatMoistB2, Me.MatStrengthXt, Me.MatStrengthXc, Me.MatStrengthYt, Me.MatStrengthYc, Me.MatStrengthS, Me.MatTWintTerm})
-        Me.MatTable.Location = New System.Drawing.Point(0, 30)
+        Me.MatTable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.MaterialID, Me.MatName, Me.MatThickness, Me.MatEL, Me.MatET, Me.MatGLT, Me.MatvLT, Me.MatThermalA1, Me.MatThermalA2, Me.MatMoistB1, Me.MatMoistB2, Me.MatStrengthXt, Me.MatStrengthXc, Me.MatStrengthYt, Me.MatStrengthYc, Me.MatStrengthS, Me.MatTWintTerm})
+        Me.MatTable.Location = New System.Drawing.Point(3, 31)
         Me.MatTable.Name = "MatTable"
         Me.MatTable.Size = New System.Drawing.Size(940, 150)
         Me.MatTable.TabIndex = 0
+        '
+        'MaterialID
+        '
+        Me.MaterialID.HeaderText = "Mat ID"
+        Me.MaterialID.Name = "MaterialID"
+        Me.MaterialID.ReadOnly = True
         '
         'MatName
         '
         Me.MatName.HeaderText = "Name/Description"
         Me.MatName.Name = "MatName"
+        Me.MatName.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.MatName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
         '
         'MatThickness
         '
@@ -754,7 +794,7 @@ Partial Class User_Interface
         Me.TableLayoutPanel2.RowCount = 2
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(957, 587)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(805, 585)
         Me.TableLayoutPanel2.TabIndex = 3
         '
         'TableLayoutPanel3
@@ -764,45 +804,37 @@ Partial Class User_Interface
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.Btn_Analyze, 1, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 544)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 542)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(951, 40)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(799, 40)
         Me.TableLayoutPanel3.TabIndex = 3
         '
         'Btn_Analyze
         '
         Me.Btn_Analyze.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.Btn_Analyze.Location = New System.Drawing.Point(873, 8)
+        Me.Btn_Analyze.Location = New System.Drawing.Point(721, 8)
         Me.Btn_Analyze.Name = "Btn_Analyze"
         Me.Btn_Analyze.Size = New System.Drawing.Size(75, 23)
         Me.Btn_Analyze.TabIndex = 0
         Me.Btn_Analyze.Text = "Analyze"
         Me.Btn_Analyze.UseVisualStyleBackColor = True
         '
-        'TableLayoutPanel5
+        'Label1
         '
-        Me.TableLayoutPanel5.ColumnCount = 3
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel5.Controls.Add(Me.LabelSym, 2, 0)
-        Me.TableLayoutPanel5.Controls.Add(Me.Btn_Clear, 0, 0)
-        Me.TableLayoutPanel5.Controls.Add(Me.BtnSym, 1, 0)
-        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel5.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
-        Me.TableLayoutPanel5.RowCount = 1
-        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(931, 44)
-        Me.TableLayoutPanel5.TabIndex = 6
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(606, 213)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Label1"
         '
         'User_Interface
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(957, 633)
+        Me.ClientSize = New System.Drawing.Size(805, 631)
         Me.Controls.Add(Me.TableLayoutPanel2)
         Me.Controls.Add(Me.MainStatusStrip)
         Me.Controls.Add(Me.MenuStrip)
@@ -822,17 +854,17 @@ Partial Class User_Interface
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.TableLayoutPanel4.PerformLayout()
         Me.TabLayup.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         CType(Me.LayerTable, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.TableLayoutPanel5.ResumeLayout(False)
+        Me.TableLayoutPanel5.PerformLayout()
         Me.TabLoads.ResumeLayout(False)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabMaterial.ResumeLayout(False)
         CType(Me.MatTable, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.TableLayoutPanel5.ResumeLayout(False)
-        Me.TableLayoutPanel5.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -864,22 +896,6 @@ Partial Class User_Interface
     Friend WithEvents LabelSym As Windows.Forms.Label
     Friend WithEvents TabMaterial As Windows.Forms.TabPage
     Friend WithEvents MatTable As Windows.Forms.DataGridView
-    Friend WithEvents MatName As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatThickness As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatEL As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatET As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatGLT As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatvLT As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatThermalA1 As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatThermalA2 As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatMoistB1 As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatMoistB2 As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatStrengthXt As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatStrengthXc As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatStrengthYt As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatStrengthYc As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatStrengthS As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents MatTWintTerm As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents DataGridView1 As Windows.Forms.DataGridView
     Friend WithEvents LoadNX As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents LoadNY As Windows.Forms.DataGridViewTextBoxColumn
@@ -916,4 +932,23 @@ Partial Class User_Interface
     Friend WithEvents MatID As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PlyAngle As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel5 As Windows.Forms.TableLayoutPanel
+    Friend WithEvents ComboBox1 As Windows.Forms.ComboBox
+    Friend WithEvents MaterialID As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatName As Windows.Forms.DataGridViewComboBoxColumn
+    Friend WithEvents MatThickness As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatEL As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatET As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatGLT As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatvLT As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatThermalA1 As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatThermalA2 As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatMoistB1 As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatMoistB2 As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatStrengthXt As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatStrengthXc As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatStrengthYt As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatStrengthYc As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatStrengthS As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents MatTWintTerm As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Label1 As Windows.Forms.Label
 End Class
